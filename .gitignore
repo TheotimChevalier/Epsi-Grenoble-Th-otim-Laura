@@ -1,0 +1,9 @@
+P1/react-hello/node_modules/
+P1/react-hello/dist/
+P2/react-hello2/frontend/node_modules/
+P2/react-hello2/frontend/dist/*
+P2/react-hello2/backend/node_modules/
+P4/react-hello2/frontend/node_modules/
+P4/react-hello2/frontend/dist/*
+P4/react-hello2/backend/node_modules/
+.idea
