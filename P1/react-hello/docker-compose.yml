@@ -1,15 +1,11 @@
-version: '3.8'
-
 services:
   react-hello:
-    build: .
-    image: yourdockerhubusername/react-hello:1.0-dev
+    build:
+      context: .
+      # dockerfile: Dockerfile  # optionnel si ton Dockerfile s'appelle "Dockerfile"
     ports:
-      - "3000:80"
+      - "3000:3000"
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
+    volumes:
+      - .:/app
+      - /app/node_modules

@@ -1,14 +1,15 @@
-# Étape 1 : build de l'application React
-FROM node:20-alpine AS build
+FROM node:20-alpine
 WORKDIR /app
 
-# Copier les dépendances et installer
+# Copier les fichiers de dépendances et installer
 COPY package*.json ./
 RUN npm ci
 
-# Copier le reste des fichiers et construire l'app
+# Copier le reste des fichiers
 COPY . .
-RUN npm run build
 
-# Exposer le port 80
-EXPOSE 80
+# Exposer le port du serveur React
+EXPOSE 3000
+
+# Lancer le serveur de développement React
+CMD ["npm", "start"]
