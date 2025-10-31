@@ -1,0 +1,187 @@
+.jumbotron {
+    padding: 4rem 2rem;
+    margin-bottom: 2rem;
+    background-color: var(--bs-light);
+    border-radius: .3rem;
+}
+
+.projects_list__container {
+    border-top: 1px solid var(--adno-main-color);
+    padding-top: 30px;
+}
+
+.projects_list__container .projects_list__title {
+    text-align: center;
+    color: var(--adno-main-color);
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+
+#projects_list {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: 50px;
+}
+
+.with_projects {
+    display: flex;
+    width: 100%;
+}
+
+.with_projects_left {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#myForm {
+    flex-shrink: 0;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid var(--adno-main-color);
+    padding: 0 3.25rem;
+}
+
+.import_container {
+    flex-shrink: 0;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 4%;
+}
+
+.adno_import_description {
+    line-height: 48px;
+    text-align: center;
+}
+
+.with_projects_right {
+    width: 65%;
+    padding: 15px;
+}
+
+.with_projects_right #projects_list {
+    width: 100%;
+}
+
+#import_2 {
+    margin-top: 5%;
+}
+
+.import_project_separator {
+    text-align: center;
+    margin: 5% 0 5% 0;
+}
+
+.picture-div {
+    width: 85%;
+    margin: 5vh auto 0 auto;
+    height: 90%;
+}
+
+.project-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.projet-page-title {
+    text-align: center;
+    margin: 4vh auto 4vh auto;
+}
+
+.adno_container {
+    max-width: 1400px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+.project-card:hover {
+    border: 2px solid #007bff;
+}
+
+.homewpbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px;
+    align-items: center;
+}
+
+.btn-sh-examples {
+    margin-top: 10px;
+}
+
+.create_project_2 {
+    max-width: 250px;
+}
+
+.create_project_2 svg {
+    margin-right: 10px;
+}
+
+.add_url {
+    max-width: 700px;
+    margin-bottom: 15px;
+}
+
+.adno_title {
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    padding: 30px 0;
+    color: var(--adno-main-color);
+}
+
+.home h1 {
+    font-weight: 400;
+}
+
+.adno_title h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+}
+
+.adno_home_selection {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 50px 0;
+}
+
+.adno_description {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    font-weight: 300;
+    width: 60%;
+    margin: 0 auto 30px;
+}
+
+.spin {
+    animation-name: spin;
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}

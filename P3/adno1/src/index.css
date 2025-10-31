@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --adno-main-color: #075985; /* Sky 800 */
+    --adno-second-color: #0284C7; /* Sky 600 */ 
+    --adno-background: #FAFAFA; /* Neutral 50 */
+    --adno-edit-color: #DC143C;  /* Orange 500 */
+    --adno-view-color: #A3B18A; /* Lime 500 */
+}
+
+.debug {
+    outline: 1px solid red;
+}
+
+.adno_title div {
+    display: none;
+}
+
+.adno-link{
+    color: #551A8B;
+}
+
+.custom-react-select {
+    z-index: 100;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: var(--adno-background);;
+    font-family: 'Jost', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: revert;
+    font-weight: revert;
+    margin: unset;
+}
+
+ul {
+    margin: revert; 
+    padding: revert;
+    list-style: disc;
+}
+
+.py-4 code {
+    padding: 0 0.5em;
+    margin: 0 0.5em;
+}
+
+.toastui-editor-toolbar-icons {
+    background: url(../img/md-icons.png)  0 0 / 466px 146px no-repeat;
+    background-position-y: 3px;
+}
+
+#toolbar-container button.a9s-toolbar-btn {
+    margin: 0 4px 0 ;
+    padding: 4px;
+    width: 40px;
+    height: 40px;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+}
+
+footer {
+    row-gap: inherit !important;
+}
+
+.a9s-annotationlayer .outline-1px .a9s-inner {
+    stroke-width: 1px;
+}
+
+.a9s-annotationlayer .outline-1px .a9s-outer {
+    stroke-width: 3px;
+}
+
+.a9s-annotationlayer .outline-2px .a9s-inner {
+    stroke-width: 2px;
+}
+
+.a9s-annotationlayer .outline-2px .a9s-outer {
+    stroke-width: 4px;
+}
+
+.a9s-annotationlayer .outline-3px .a9s-inner {
+    stroke-width: 3px;
+}
+
+.a9s-annotationlayer .outline-3px .a9s-outer {
+    stroke-width: 5px;
+}
+
+.a9s-annotationlayer .outline-5px .a9s-inner {
+    stroke-width: 5px;
+}
+
+.a9s-annotationlayer .outline-5px .a9s-outer {
+    stroke-width: 7px;
+}
+
+.a9s-annotationlayer .outline-8px .a9s-inner {
+    stroke-width: 8px;
+}
+
+.a9s-annotationlayer .outline-8px .a9s-outer {
+    stroke-width: 10px;
+}

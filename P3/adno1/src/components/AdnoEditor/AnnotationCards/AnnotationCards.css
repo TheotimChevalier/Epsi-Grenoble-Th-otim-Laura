@@ -1,0 +1,48 @@
+.anno-card{
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.adno-nb-annos{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.adno-card-body{
+    height: 70px;
+    width: 276px;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: pre-wrap;
+}
+
+.adno-card-selected-body{
+    width: 276px;
+    min-height: 70px;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: pre-wrap;
+}
+
+.anno-cards{
+    display: flex;
+    justify-content: left;
+    gap: 15px;
+    width: 100%;
+}
+
+.label-text{
+    color: white;
+}
+
+#autosaving-txt{
+    color: white;
+}

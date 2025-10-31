@@ -1,0 +1,66 @@
+.project-metadatas-backdrop {
+    width: 100vw;
+    height: 100vh;
+    z-index: 100000000000;
+    background: #5c5555db;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.project-metadatas-container {
+    width: 90vw;
+    height: 80vh;
+    background-color: #fff;
+    border-radius: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.project-metadatas {
+    width: 75%;
+    height: 85%;
+    overflow: auto;
+}
+
+.propject-metadatas--grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+.propject-metadatas--grid label {
+    margin: 0;
+    display: inherit;
+}
+
+.propject-metadatas--grid label>div:first-child {
+    padding: 0;
+}
+
+.project-metadatas>input {
+    width: 100%;
+    max-width: 100%;
+}
+
+.project-metadatas>label>span {
+    color: black;
+    margin: 10px 0;
+}
+
+.closeBtnMetadatas {
+    width: 80vw;
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 1340px) {
+    .project-metadatas {
+        width: 90%;
+    }
+}
