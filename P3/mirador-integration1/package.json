@@ -1,0 +1,30 @@
+{
+  "name": "mirador-integration",
+  "version": "1.0.0",
+  "description": "Examples of integrating Mirador 4 with plugins",
+  "private": true,
+  "scripts": {
+    "serve": "rm -rf dist .parcel-cache && parcel index.html",
+    "serve-umd": "rm -rf dist .parcel-cache && parcel index-umd.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^7.0.0",
+    "@mui/system": "^7.0.0",
+    "mirador": "4.0.0",
+    "mirador-image-tools": "1.0.0",
+    "mirador-share-plugin": "1.0.0",
+    "prop-types": "^15.7.2",
+    "parcel": "^2.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-i18next": "^15.0.0"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+}
