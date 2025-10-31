@@ -27,7 +27,7 @@
    - On prendra soin de ne pas inclure des fichiers et dossiers inutiles dans l'image (fichier .dockerignore)
 - Construire l'image en local, crée un conteneur l'utilisant et accèder à l'app
 
---> À compléter : Fournir les commandes utilisées
+--> docker-compose up --build
 
 - Écrire un fichier `docker-compose.yml` permettant de déployer cette application
 
@@ -88,7 +88,7 @@
   - Choisir des applications utilisant des technologies différentes (nodejs, python, ruby, php, go, java, etc.)
 
 --> Fournir l'URL des dépot de l'application
---> Décrire les enjeux techniques de la conteneurisation liée à l'application (technologies plus mises à jour, nombreuses dépendances, interconnexion avec d'autres systèmes ...)
+
 
 - Écrire l'ensemble des fichiers permettant de déployer ces application avec Docker, docker-compose
 
@@ -99,6 +99,61 @@
    - Persistence documentée. 
    - Exposition réseau minimale, Aucune base de données exposée publiquement. 
    - Conteneurs runtime non-root quand praticable.
+
+1. mirador‑integration (dépôt Mirador Integration)
+
+Lien : https://github.com/ProjectMirador/mirador-integration
+ 
+GitHub
+
+Description : Ce dépôt propose des exemples d’intégration de Mirador (une librairie JS d’affichage/annotation d’images IIIF) avec des build systems modernes. 
+GitHub
++1
+
+Enjeux techniques principaux à considérer pour la conteneurisation :
+
+Build reproductible : Le projet dépend de Node.js, React, etc. Il faudra s’assurer que le Dockerfile utilise npm ci (ou yarn install --frozen-lockfile) pour garantir que les versions sont bien figées. Ex : ce type de repo « intégration » montre qu’il y a des dépendances de plugins, modules externes.
+
+Pas de secrets commités : Comme il s’agit surtout d’un front/JS, l’enjeu est plus faible côté base de données ou API back­end, mais il faudra vérifier qu’il n’y ait pas de clés d’API, tokens dans le code ou le .env. Le README n’évoque pas de secrets visibles. 
+GitHub
+
+Healthcheck présent : Habituellement les front­end seuls ne le font pas, mais c’est un bon plus : on peut ajouter un healthcheck dans le container (ex. wget -q --spider http://localhost || exit 1).
+
+Persistance documentée : Ici, en l’état ce dépôt semble être une application front statique ou semi‐statique (serveur de build). Il n’y a pas de BDD ou de données dynamiques importantes ; donc persistance = faible enjeu ou à documenter « build → static ».
+
+Exposition réseau minimale / aucune base de données exposée : En tant qu’application front, idéalement elle s’expose sur un seul port (ex HTTP 80/443) et n’a pas de back-direct exposé. On devra sécuriser cela dans docker-compose (exposer uniquement front).
+
+Conteneur runtime non-root : Il faudra veiller à ce que le conteneur final (servant l’app) utilise un user non‐root, ce qui est souvent négligé dans les images de démo front.
+
+2. adno (dépôt Adno)
+
+Lien : https://github.com/adnodev/adno
+ 
+
+
+Description : Adno est une application web pour la visualisation, édition et partage de narrations sur des images (IIIF), avec une version « full » (éditeur + viewer) ou « light » (viewer seul). 
+
+Enjeux techniques principaux à considérer :
+
+Build reproductible : Comme pour le précédent, dépendances Node.js/JS, mais ici l’architecture pourrait être plus complexe (éditeur + viewer) ce qui implique deux modes de build (build-full, build-light). Il faudra configurer des Dockerfile multi‐stage pour gérer les deux variantes, figer les dépendances (yarn.lock ou package-lock.json), utiliser npm ci ou yarn install --frozen-lockfile.
+
+Pas de secrets commités : Ici likely plus de configuration (édition, peut-être accès à des API, configuration d'édition). On devra vérifier .env.example (présent) et s’assurer que .env n’est pas dans le dépôt avec des valeurs sensibles. 
+GitHub
+
+Healthcheck présent : Dans une app plus complète, il est important d’ajouter un healthcheck dans le conteneur (par exemple pour l’éditeur si serveur ou service).
+
+Persistance documentée : Si l’éditeur stocke des données (annotations, parcours), on devra traiter la persistance : volumes Docker, base de données ou stockage de fichiers, ou stockage local du navigateur. Le README indique que « le code ne s’exécute que dans votre navigateur et pas côté serveur » pour la version statique. 
+
+Adno
+
+ Si tu conteneurises, tu devras décider s’il y a une DB, un stockage fichier, ou rien (statique). Documenter ce choix.
+
+Exposition réseau minimale / aucune base de données exposée publiquement : Si tu ajoutes une base de données ou un backend, ce critère devient critique. Sinon, pour une app statique, il s’agit simplement d’exposer le port web et de ne pas ouvrir d’autres services.
+
+Conteneur runtime non‐root : Comme pour le front, veiller à ce que l’image finale pour production tourne avec un utilisateur non-root.
+
+Complexité supplémentaire : L’application supporte deux modes (full / light) ce qui ajoute un enjeu de configuration (quel build utiliser ? quel serveur ?). Le fait qu’elle traite des images IIIF, potentiellement de gros fichiers, peut aussi entraîner des optimisations d’images, cache, etc.
+
 
 
 - Faire une PR de votre travail à l'application choisie
@@ -127,9 +182,9 @@ Certaines sont vielles, mal documentées, incompréhensibles, c'est volontaire !
 ## Partie 4 : Utiliser un Application Proxy - Traefik
 
 - Qu'est ce qu'un Reverse Proxy et à quoi est ce que ça sert ? 
-- Qu'est ce qu'un Application Proxy et à quoi est ce que ça sert ?
 
---> À compléter
+Un reverse proxy est un serveur placé devant un ou plusieurs serveurs web. Il reçoit les requêtes des clients et les transmet aux serveurs internes appropriés.
+Un application proxy analyse et filtre les requêtes au niveau applicatif pour contrôler l'accès et bloquer les attaques ciblant les applications.
 
 - Installer et déployer Traefik via Docker sur votre VPS
    - Traefik recoit le trafik sur les ports classiques (80, 443)
@@ -170,6 +225,8 @@ La stack proposée `VPS + Docker + Docker-compose + Traefik` est suffisante pour
     - Un hébergeur VPS
     - DockerHub 
 
---> À completer : Quelles sont les limites de cette approche et votre proposition de remplacement. (Réponse construite d'une dizaine de ligne)
+Bien que cette stack soit efficace, elle présente certaines limites. Tout d’abord, la gestion de la montée en charge peut devenir complexe : un simple VPS atteint rapidement ses limites en ressources CPU, RAM et stockage. La haute disponibilité n’est pas native, ce qui signifie que si le VPS tombe, toute l’infrastructure tombe avec lui. De plus, la gestion des mises à jour, des backups et du scaling reste largement manuelle, nécessitant une vigilance opérationnelle importante. Traefik est très puissant, mais peut devenir complexe à maintenir à grande échelle, surtout sans orchestration avancée. Enfin, l’absence d’un orchestrateur comme Kubernetes limite l’automatisation et l’auto-remédiation en cas de panne.
+
+Une alternative adaptée à des environnements plus exigeants serait de migrer vers un cluster Kubernetes (par exemple k3s pour rester léger), combiné avec un fournisseur cloud ou un cluster de machines pour assurer la redondance. Cela permettrait d’obtenir du scaling automatique, de la tolérance aux pannes, une gestion centralisée des secrets, des logs et du monitoring plus mature. Cette approche apporte plus de robustesse et d’automatisation, au prix d’une complexité supérieure à l’installation et à la maintenance.
 
 

@@ -4,5 +4,10 @@ services:
     build: .
     ports:
       - "8080:1234"
-    env_file:
-      - .env
+    environment:
+      - ADNO_MODE=${ADNO_MODE}
+      - ADNO_TITLE=${ADNO_TITLE}
+      - ADNO_FOOTER=${ADNO_FOOTER}
+      - ADNO_FOOTER_TEXT=${ADNO_FOOTER_TEXT}
+      - GRANTED_IMG_EXTENSIONS=${GRANTED_IMG_EXTENSIONS}
+      - CORS_SERVER=${CORS_SERVER}
