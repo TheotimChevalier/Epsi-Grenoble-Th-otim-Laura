@@ -1,0 +1,49 @@
+services:
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: appdb
+      MARIADB_USER: app
+      MARIADB_PASSWORD: app
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d:ro
+    networks:
+      - backend_net
+
+  api:
+    build: ./backend
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_USER: app
+      DB_PASSWORD: app
+      DB_NAME: appdb
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    restart: no
+    networks:
+      - backend_net
+      - frontend_net
+
+  web:
+    build: ./frontend
+    environment:
+      - VITE_API_URL=http://localhost:3000
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    restart: no
+    networks:
+      - frontend_net
+
+networks:
+  backend_net:
+    driver: bridge
+  frontend_net:
+    driver: bridge

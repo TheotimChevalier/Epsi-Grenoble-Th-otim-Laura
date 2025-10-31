@@ -1,0 +1,11 @@
+services:
+  react-hello:
+    build:
+      context: .
+      # dockerfile: Dockerfile  # optionnel si ton Dockerfile s'appelle "Dockerfile"
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - .:/app
+      - /app/node_modules
